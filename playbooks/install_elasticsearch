@@ -1,0 +1,9 @@
+---
+- name: Import klucza GPG Elastic
+  hosts: all
+  become: true
+  tasks:
+    - name: Dodaj klucz GPG Elastic do menedżera RPM
+      ansible.builtin.rpm_key:
+        state: present
+        key: https://artifacts.elastic.co/GPG-KEY-elasticsearch
