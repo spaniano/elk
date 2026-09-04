@@ -25,3 +25,7 @@
         - { limit: 'nofile', value: '65535' }
         - { limit: 'nproc', value: '4096' }
         - { limit: 'memlock', value: 'unlimited' }
+    - name: Install Elasticsearch
+      ansible.builtin.dnf:
+        name: /tmp/elasticsearch-9.4.6-x86_64.rpm
+        state: present
