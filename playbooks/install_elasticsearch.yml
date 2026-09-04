@@ -46,3 +46,7 @@
             path: /etc/elasticsearch/elasticsearch.yml
             regexp: '^#?transport\.host:'
             line: 'transport.host: 0.0.0.0'
+        - name: Set autostart Elasticsearch service
+          ansible.builtin.service:
+            name: elasticsearch.service
+            enabled: true
