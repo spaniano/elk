@@ -27,5 +27,5 @@
         - { limit: 'memlock', value: 'unlimited' }
     - name: Install Elasticsearch
       ansible.builtin.dnf:
-        name: /tmp/elasticsearch-9.4.6-x86_64.rpm
+        name: /tmp/elasticsearch_installer/elasticsearch-9.4.6-x86_64.rpm
         state: present
