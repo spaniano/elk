@@ -8,7 +8,7 @@
         state: present
         key: https://artifacts.elastic.co/GPG-KEY-elasticsearch
     - name: Utworzenie użytkownika elasticsearch
-		ansible.builtin.user:
+	ansible.builtin.user:
         name: elasticsearch
         system: true
         shell: /usr/sbin/nologin
