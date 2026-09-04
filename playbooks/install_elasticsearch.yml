@@ -29,7 +29,7 @@
       ansible.builtin.dnf:
         name: /tmp/elasticsearch_installer/elasticsearch-9.4.6-x86_64.rpm
         state: present
-    - name: ***** Configure Elasticsearch *****
+    - name: Configure Elasticsearch
       block:
         - name: Set cluster name
           ansible.builtin.lineinfile:
