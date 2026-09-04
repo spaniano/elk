@@ -29,7 +29,7 @@
       ansible.builtin.dnf:
         name: /tmp/elasticsearch_installer/elasticsearch-9.4.6-x86_64.rpm
         state: present
-    - name: Configure Elasticsearch
+    - name: ***** Configure Elasticsearch *****
       block:
         - name: Set cluster name
           ansible.builtin.lineinfile:
@@ -41,3 +41,8 @@
             path: /etc/elasticsearch/elasticsearch.yml
             regexp: '^#?network\.host:'
             line: 'network.host: 0.0.0.0'
+        - name: Set transport host
+          ansible.builtin.lineinfile:
+            path: /etc/elasticsearch/elasticsearch.yml
+            regexp: '^#?transport\.host:'
+            line: 'transport.host: 0.0.0.0'
