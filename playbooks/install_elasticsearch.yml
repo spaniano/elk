@@ -15,3 +15,13 @@
         home: /var/lib/elasticsearch
         create_home: false
         state: present
+    - name: Ustaw limity dla użytkownika elasticsearch
+      ansible.builtin.lineinfile:
+        path: /etc/security/limits.conf
+        regexp: '^elasticsearch\s+-\s+{{ item.limit }}\s+'
+        line: 'elasticsearch  -  {{ item.limit }}  {{ item.value }}'
+        state: present
+      loop:
+        - { limit: 'nofile', value: '65535' }
+        - { limit: 'nproc', value: '4096' }
+        - { limit: 'memlock', value: 'unlimited' }
