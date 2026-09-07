@@ -4,9 +4,9 @@
   become: true
   vars:
     kibana_version: "9.4.6"
-    elasticsearch_arch: "x86_64"
+    kibana_arch: "x86_64"
     download_dir: "/tmp/kibana_installer"
-    rpm_filename: "kibana-{{ elasticsearch_version }}-{{ elasticsearch_arch }}.rpm"
+    rpm_filename: "kibana-{{ kibana_version }}-{{ kibana_arch }}.rpm"
     download_url: "https://artifacts.elastic.co/downloads/kibana/{{ rpm_filename }}"
   
   tasks:
