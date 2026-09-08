@@ -1,0 +1,5 @@
+---
+- name: Instalacja Agenta Elastic
+  hosts: all
+  become: true
+  tasks:
