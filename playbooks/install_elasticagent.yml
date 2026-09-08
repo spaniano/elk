@@ -3,3 +3,12 @@
   hosts: all
   become: true
   tasks:
+    - name: Dodaj klucz GPG Elastic do menedżera RPM
+      ansible.builtin.rpm_key:
+        state: present
+        key: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+    - name: Install Agent ELK
+      ansible.builtin.dnf:
+        name: /tmp/elasticagent_installer/elastic-agent-9.5.1-x86_64.rpm
+        state: present
+
