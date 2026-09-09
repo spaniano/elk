@@ -1,0 +1,31 @@
+---
+- name: Instalacja Agenta Elastic
+  hosts: all
+  become: true
+  tasks:
+    - name: Dodaj klucz GPG Elastic do menedżera RPM
+      ansible.builtin.rpm_key:
+        state: present
+        key: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+    - name: Zainstaluj Elastic Agent z wybranym wariantem
+      ansible.builtin.shell:
+        cmd: ELASTIC_AGENT_FLAVOR=servers rpm -vi elastic-agent-9.5.1-x86_64.rpm
+      environment:
+        ELASTIC_AGENT_FLAVOR: servers
+    - name: Włącz i uruchom usługę elastic-agent
+      ansible.builtin.systemd:
+        name: elastic-agent
+        enabled: true
+        state: started
+    - name: Zarejestruj Elastic Agent w Fleet Serverze
+      ansible.builtin.command:
+        cmd: >
+          elastic-agent enroll
+          --fleet-server-es=https://192.168.1.163:9200
+          --fleet-server-service-token=AAEAAWVsYXN0aWMvZmxlZXQtc2VydmVyL3Rva2VuLTE3ODg5NTkyOTk3ODQ6XzN3ZXdLdnBSbXEzVFdYXzFCYWJZUQ
+          --fleet-server-policy=fleet-server-policy
+          --fleet-server-es-ca-trusted-fingerprint=fe3833e5883dfb5710710cddfb4d5704216f0b445874f36be306b0920e06d96f
+          --fleet-server-port=8220
+          --non-interactive
+      args:
+        creates: /etc/elastic-agent/elastic-agent.yml
