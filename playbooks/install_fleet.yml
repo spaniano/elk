@@ -9,7 +9,7 @@
         key: https://artifacts.elastic.co/GPG-KEY-elasticsearch
     - name: Zainstaluj Elastic Agent z wybranym wariantem
       ansible.builtin.shell:
-        cmd: ELASTIC_AGENT_FLAVOR=servers rpm -vi elastic-agent-9.5.1-x86_64.rpm
+        cmd: ELASTIC_AGENT_FLAVOR=servers rpm -vi /tmp/elasticagent_installer/elastic-agent-9.5.1-x86_64.rpm
       environment:
         ELASTIC_AGENT_FLAVOR: servers
     - name: Włącz i uruchom usługę elastic-agent
