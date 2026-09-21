@@ -8,6 +8,7 @@
     kafka_partitions: 3
     kafka_replication_factor: 1
     kafka_bin_path: "/opt/kafka/bin" # Ścieżka do skryptów CLI Kafki
+  
   tasks:
     - name: Wyświetl wynik operacji na Kafka
       ansible.builtin.debug:
