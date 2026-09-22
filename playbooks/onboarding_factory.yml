@@ -4,12 +4,24 @@
   gather_facts: false
   vars:
     kafka_bootstrap_server: "localhost:9092"
-    kafka_topic_name: "moj-nowy-topic"
+    kafka_topic_name: "tesla"
     kafka_partitions: 3
     kafka_replication_factor: 1
     kafka_bin_path: "/opt/kafka/bin" # Ścieżka do skryptów CLI Kafki
   
   tasks:
+    - name: Utwórz topic w Kafka
+      ansible.builtin.command:
+        cmd: >
+          {{ kafka_bin_path }}/kafka-topics.sh --create
+          --bootstrap-server {{ kafka_bootstrap_server }}
+          --topic {{ kafka_topic_name }}
+          --partitions {{ kafka_partitions }}
+          --replication-factor {{ kafka_replication_factor }}
+          --if-not-exists
+      register: kafka_topic_result
+      changed_when: "'Created topic' in kafka_topic_result.stdout"
+
     - name: Wyświetl wynik operacji na Kafka
       ansible.builtin.debug:
-        msg: "Topic został pomyślnie utworzony lub już istnieje."
+        msg: "Topic '{{ kafka_topic_name }}' został pomyślnie utworzony lub już istnieje."
