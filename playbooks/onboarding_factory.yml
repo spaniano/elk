@@ -3,7 +3,7 @@
   hosts: kafka
   gather_facts: false
   vars_files:
-    - /elk/inventory/group_vars/kafka_servers.yml
+    - ../inventory/group_vars/kafka_servers.yml
   
   tasks:
     - name: Utwórz topic w Kafka
