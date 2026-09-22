@@ -2,12 +2,8 @@
 - name: Zarządzanie klastrem Kafka
   hosts: kafka
   gather_facts: false
-  vars:
-    kafka_bootstrap_server: "localhost:9092"
-    kafka_topic_name: "tesla"
-    kafka_partitions: 3
-    kafka_replication_factor: 1
-    kafka_bin_path: "/opt/kafka/bin" # Ścieżka do skryptów CLI Kafki
+  vars_files:
+    - /elk/inventory/group_vars/kafka_servers.yml
   
   tasks:
     - name: Utwórz topic w Kafka
