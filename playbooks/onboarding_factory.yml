@@ -1,6 +1,6 @@
 ---
 - name: Zarządzanie klastrem Kafka
-  hosts: kate163
+  hosts: kafka
   gather_facts: false
   vars:
     kafka_bootstrap_server: "localhost:9092"
